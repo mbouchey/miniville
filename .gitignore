@@ -1,8 +1,0 @@
-App.config
-miniville.csproj
-miniville.sln
-*.suo
-obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
-obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-obj/Debug/miniville.csprojAssemblyReference.cache
-Properties/AssemblyInfo.cs
