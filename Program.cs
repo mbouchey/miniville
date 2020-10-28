@@ -8,7 +8,7 @@ namespace MiniVille
 
         static void Main(string[] args)
         {
-            //testgit antho
+
             Game g = new Game();
            //test git vadim 
         }
