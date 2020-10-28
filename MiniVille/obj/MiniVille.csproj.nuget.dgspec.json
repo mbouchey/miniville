@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Solal\\Documents\\Enjmin\\USRS46_Csharp_POO\\Défi_MiniVille\\Source\\MiniVille\\MiniVille.csproj": {}
+    "C:\\Users\\maxim\\Desktop\\Formation\\1 - Exos\\9 - miniville\\MiniVille\\MiniVille.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Solal\\Documents\\Enjmin\\USRS46_Csharp_POO\\Défi_MiniVille\\Source\\MiniVille\\MiniVille.csproj": {
+    "C:\\Users\\maxim\\Desktop\\Formation\\1 - Exos\\9 - miniville\\MiniVille\\MiniVille.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Solal\\Documents\\Enjmin\\USRS46_Csharp_POO\\Défi_MiniVille\\Source\\MiniVille\\MiniVille.csproj",
+        "projectUniqueName": "C:\\Users\\maxim\\Desktop\\Formation\\1 - Exos\\9 - miniville\\MiniVille\\MiniVille.csproj",
         "projectName": "MiniVille",
-        "projectPath": "C:\\Users\\Solal\\Documents\\Enjmin\\USRS46_Csharp_POO\\Défi_MiniVille\\Source\\MiniVille\\MiniVille.csproj",
-        "packagesPath": "C:\\Users\\Solal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Solal\\Documents\\Enjmin\\USRS46_Csharp_POO\\Défi_MiniVille\\Source\\MiniVille\\obj\\",
+        "projectPath": "C:\\Users\\maxim\\Desktop\\Formation\\1 - Exos\\9 - miniville\\MiniVille\\MiniVille.csproj",
+        "packagesPath": "C:\\Users\\maxim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maxim\\Desktop\\Formation\\1 - Exos\\9 - miniville\\MiniVille\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Solal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maxim\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
