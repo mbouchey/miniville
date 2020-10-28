@@ -3,14 +3,8 @@
 namespace MiniVille
 {
     
-    class Program
+    class BlueCard
     {
 
-        static void Main(string[] args)
-        {
-
-            Game g = new Game();
-            
-        }
     }
 }

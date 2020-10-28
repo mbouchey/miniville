@@ -2,15 +2,9 @@
 
 namespace MiniVille
 {
-    
-    class Program
+
+    class Card
     {
 
-        static void Main(string[] args)
-        {
-
-            Game g = new Game();
-            
-        }
     }
 }
