@@ -10,7 +10,7 @@ namespace MiniVille
         {
 
             Game g = new Game();
-            
+            //Solal
         }
     }
 }
