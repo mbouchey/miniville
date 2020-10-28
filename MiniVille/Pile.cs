@@ -18,7 +18,8 @@ namespace MiniVille
             return base.ToString();
         }
 
-        public Card SellCard()
+        //Returns the card with the wanted id
+        public Card SellCard(int id)
         {
             
         }
