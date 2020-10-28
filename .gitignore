@@ -1,2 +1,8 @@
 .vs/miniville/v16/.suo
 MiniVille/.vs/MiniVille/v16/.suo
+MiniVille/obj/MiniVille.csproj.nuget.dgspec.json
+MiniVille/obj/project.assets.json
+MiniVille/obj/Debug/netcoreapp3.1/MiniVille.assets.cache
+MiniVille/obj/project.nuget.cache
+MiniVille/obj/Debug/netcoreapp3.1/MiniVille.csprojAssemblyReference.cache
+MiniVille/obj/MiniVille.csproj.nuget.g.props
