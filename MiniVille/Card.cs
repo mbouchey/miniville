@@ -17,12 +17,12 @@ namespace MiniVille
         private int _activation_value;
         public int activation_value {get {return _activation_value;}}
 
-        public Card(string name, int price, int earning_money, int activation_value)
+        public Card(CardsInfo cardInfo)
         {
-            this._name = name;
-            this._price = price;
-            this._earning_money = earning_money;
-            this._activation_value = activation_value;
+            this._name = cardInfo.Name;
+            this._price = cardInfo.Cost;
+            this._earning_money = cardInfo.Gain;
+            this._activation_value = cardInfo.Dice;
         }
 
         public override string ToString()

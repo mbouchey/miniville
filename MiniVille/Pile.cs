@@ -21,7 +21,8 @@ namespace MiniVille
         //Returns the card with the wanted id
         public Card SellCard(int id)
         {
-            
+            CardsInfo cardInfo = Available_cards.Find(x => x.Id == id);
+            return new Card(cardInfo);
         }
 
         //Show All cards with their information IN THE CONSOLE
