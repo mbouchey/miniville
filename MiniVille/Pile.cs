@@ -6,9 +6,9 @@ namespace MiniVille
 
     class Pile
     {
-        public List<CardsInfo> Available_cards { get; private set; }
+        public List<Card> Available_cards { get; private set; }
 
-        public Pile(List<CardsInfo> available_cards)
+        public Pile(List<Card> available_cards)
         {
             this.Available_cards = available_cards;
         }
@@ -21,8 +21,8 @@ namespace MiniVille
         //Returns the card with the wanted id
         public Card SellCard(int id)
         {
-            CardsInfo cardInfo = Available_cards.Find(x => x.Id == id);
-            return new Card(cardInfo);
+            Card card = Available_cards.Find(x => x.Id == id);
+            return card;
         }
 
         //Show All cards with their information IN THE CONSOLE
