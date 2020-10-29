@@ -10,14 +10,17 @@ namespace MiniVille
         public Pile pile;
         public List<Dice> dices;
 
-        public void RunGame()
-        {
-            
-        }
-
         public Game()
         {
-        
+            List<Card> cards = new List<Card>
+            {
+
+            };
+        }
+
+        public void RunGame()
+        {
+
         }
 
     }
