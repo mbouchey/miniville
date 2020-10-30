@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 
 namespace MiniVille
 {
@@ -40,7 +41,29 @@ namespace MiniVille
 
         public void RunGame()
         {
+            while(/*variable money*/)
+            {
+                //Lancer de dé du joueur A
+                
+                //Recherche de carte Utilisable par le joueur B (carte Rouge ou Bleu)
 
+                //Recherche de carte Utilisable par le joueur A (carte Verte ou Bleu)
+
+                //Affichage et Achat des cartes achetables par le joueur A
+
+                //Fin du tour Joueur A
+
+                //Lancer de dé du joueur B
+
+                //Recherche de carte Utilisable par le joueur A (carte Rouge ou Bleu)
+
+                //Recherche de carte Utilisable par le joueur B (carte Verte ou Bleu)
+
+                //Affichage et Achat des cartes achetables par le joueur B
+
+                //Fin du tour Joueur B
+
+            }
         }
 
     }
