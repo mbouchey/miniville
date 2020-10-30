@@ -28,7 +28,11 @@ namespace MiniVille
         //Show All cards with their information IN THE CONSOLE
         public void DisplayShop()
         {
-
+            foreach(Card i in Available_cards)
+            {
+                i.ToString();
+            }
+                
         }
     }
 }
