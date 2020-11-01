@@ -62,7 +62,6 @@ namespace MiniVille
 
             while(players.Any(p => p.money < 20))
             {
-                Console.WriteLine(players.Any(p => p.money >= 20));
                 //Lancer de dé
                 this.LancerDes();
                 Console.WriteLine(this.players[current_player].name + " a fait " + GetSumDices() + " avec son lancer de dé");
@@ -81,21 +80,27 @@ namespace MiniVille
                 }
                 else
                 {
-                    Console.WriteLine("Vous avez " + this.players[current_player].money + " pièce" + (this.players[current_player].money > 1 ? "s" : ""));
                     this.pile.DisplayShop();
+                    Console.WriteLine("Vous avez " + this.players[current_player].money + " pièce" + (this.players[current_player].money > 1 ? "s" : ""));
                     in_shop = true;
                     do
                     {
                         choix_achat = this.ChoixInteger("Entrez le numéro de la carte que vous souhaitez acheter", "numéro invalide", true, 0, true, this.pile.Available_cards.Count + 1);
 
-                        if (this.players[current_player].money >= this.pile.GetCard(choix_achat).price)
-                        {
-                            this.players[current_player].BuyCard(this.pile.GetCard(choix_achat));
-                        }
-
                         if (choix_achat == this.pile.Available_cards.Count)
                         {
                             in_shop = false;
+                        }
+                        else
+                        {
+                            if (this.players[current_player].money >= this.pile.GetCard(choix_achat).price)
+                            {
+                                this.players[current_player].BuyCard(this.pile.GetCard(choix_achat));
+                            }
+                            else
+                            {
+                                Console.WriteLine("Vous n'avez pas asses d'argent");
+                            }
                         }
                     } while (in_shop);
                 }
