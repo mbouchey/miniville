@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Linq;
 
 namespace MiniVille
 {
@@ -14,22 +15,22 @@ namespace MiniVille
         public Game()
         {
             //Cartes
-            Dictionary<string, Card> cards = new Dictionary<string, Card>();
+            List<Card> cards = new List<Card>();
 
-            cards.Add("Champs de blé", new Card("Champs de blé","Blue",1,1,1));
-            cards.Add("Ferme", new Card("Ferme","Blue",2,1,1));
-            cards.Add("Boulangerie", new Card("Boulangerie","Green",1,2,2));
-            cards.Add("Café", new Card("Café","Red",2,1,3));
-            cards.Add("Superette", new Card("Superette","Green",2,3,4));
-            cards.Add("Forêt", new Card("Forêt","Blue",2,1,5));
-            cards.Add("Restaurant", new Card("Restaurant","Red",4,2,5));
-            cards.Add("Stade", new Card("Stade","Blue",6,4,6));
+            cards.Add(new Card("Champs de blé","Blue",1,1,1));
+            cards.Add(new Card("Ferme","Blue",2,1,1));
+            cards.Add(new Card("Boulangerie","Green",1,2,2));
+            cards.Add(new Card("Café","Red",2,1,3));
+            cards.Add(new Card("Superette","Green",2,3,4));
+            cards.Add(new Card("Forêt","Blue",2,1,5));
+            cards.Add(new Card("Restaurant","Red",4,2,5));
+            cards.Add(new Card("Stade","Blue",6,4,6));
 
             //Listes de cartes pour les joueurs au débuts de jeu
             List<Card> starterCards = new List<Card>
             {
-                cards["Champs de blé"],
-                cards["Boulangerie"]
+                cards[0],
+                cards[2]
             };
 
             //Joueurs
@@ -51,34 +52,15 @@ namespace MiniVille
             int current_player = 0;
             int nb_players = this.players.Count;
 
-            while(/*variable money*/)
+            while(players.Any(p => p.money >= 20))
             {
                 //Lancer de dé
                 this.LancerDes();
 
-                //Recherche de carte Utilisable par le joueur (carte Verte ou Bleu)
-                foreach (var card in this.players[current_player].cards)
+                //Recherche de carte Utilisable par les joueurs
+                foreach (Player player in this.players)
                 {
-                    if ((card.color == "Green" || card.color == "Blue") && this.GetSumDices() >= card.activation_value)
-                    {
-                        this.players[current_player].EarnMoney(card.earning_money);
-                    }
-                }
-
-                //Recherche de carte Utilisable par les autres joueurs (carte Rouge ou Bleu)
-                for (int i = 0; i < nb_players; i++)
-                {
-                    if (i != current_player)
-                    {
-                        foreach (var card in this.players[i].cards)
-                        {
-                            //TODO : refaire l'activation value avec une liste de valeurs dans cards et ici mettre un in array
-                            if ((card.color == "Red" || card.color == "Blue") && this.GetSumDices() == card.activation_value)
-                            {
-                                this.players[i].EarnMoney(card.earning_money);
-                            }
-                        }
-                    }
+                    player.CheckCards(GetSumDices(), this.players[current_player]);
                 }
 
                 //Affichage et Achat des cartes achetables par le joueur
