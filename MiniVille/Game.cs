@@ -29,6 +29,8 @@ namespace MiniVille
             cards.Add(new Card("Restaurant","Red",4,2,5));
             cards.Add(new Card("Stade","Blue",6,4,6));
 
+            pile = new Pile(cards);
+
             //Listes de cartes pour les joueurs au débuts de jeu
             List<Card> starterCards = new List<Card>
             {
@@ -37,10 +39,12 @@ namespace MiniVille
             };
 
             //Joueurs
-            players.Add(new Player(starterCards, "Joueur_1", "Player"));
-            players.Add(new Player(starterCards, "Joueur_2", "IA"));
+            players = new List<Player>();
+            this.players.Add(new Player(starterCards, "Joueur_1", "Player"));
+            this.players.Add(new Player(starterCards, "Joueur_2", "IA"));
 
             //Dés
+            dices = new List<Dice>();
             dices.Add(new Dice());
 
             Console.WriteLine("Voulez-vous jouer avec deux dés ? (oui - non)");
@@ -48,6 +52,8 @@ namespace MiniVille
             {
                 dices.Add(new Dice());
             }
+
+            RunGame();
         }
 
         public void RunGame()
@@ -57,10 +63,11 @@ namespace MiniVille
             int choix_achat;
             bool in_shop;
 
-            while(players.Any(p => p.money >= 20))
+            while(players.Any(p => p.money < 20))
             {
                 //Lancer de dé
                 this.LancerDes();
+                Console.WriteLine(this.players[current_player].name + " a fait " + GetSumDices() + " avec son lancer de dé");
 
                 //Recherche de carte Utilisable par les joueurs
                 foreach (Player player in this.players)
@@ -83,19 +90,26 @@ namespace MiniVille
                 else
                 {
                     this.pile.DisplayShop();
+                    Console.WriteLine("Vous avez " + this.players[current_player].money + " pièce" + (this.players[current_player].money > 1 ? "s" : ""));
                     in_shop = true;
                     do
                     {
                         choix_achat = this.ChoixInteger("Entrez le numéro de la carte que vous souhaitez acheter", "numéro invalide", true, 0, true, this.pile.Available_cards.Count + 1);
 
-                        if (this.players[current_player].money >= this.pile.GetCard(choix_achat).price)
-                        {
-                            this.players[current_player].BuyCard(this.pile.GetCard(choix_achat));
-                        }
-
                         if (choix_achat == this.pile.Available_cards.Count)
                         {
                             in_shop = false;
+                        }
+                        else
+                        {
+                            if (this.players[current_player].money >= this.pile.GetCard(choix_achat).price)
+                            {
+                                this.players[current_player].BuyCard(this.pile.GetCard(choix_achat));
+                            }
+                            else
+                            {
+                                Console.WriteLine("Vous n'avez pas asses d'argent");
+                            }
                         }
                     } while (in_shop);
                 }

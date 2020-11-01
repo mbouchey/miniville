@@ -43,7 +43,7 @@ namespace MiniVille
                         break;
 
                     case "Green":
-                        color = ConsoleColor.White;
+                        color = ConsoleColor.Green;
                         break;
 
                     default:
