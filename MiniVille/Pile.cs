@@ -21,8 +21,7 @@ namespace MiniVille
         //Returns the card with the wanted id
         public Card SellCard(int id)
         {
-            Card card = Available_cards.Find(x => x.Id == id);
-            return card;
+            return Available_cards.Find(x => x.Id == id);
         }
 
         //Show All cards with their information IN THE CONSOLE
@@ -30,7 +29,7 @@ namespace MiniVille
         {
             foreach(Card i in Available_cards)
             {
-                i.ToString();
+                Console.WriteLine(i.ToString());
             }
                 
         }

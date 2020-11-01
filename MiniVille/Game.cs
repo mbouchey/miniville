@@ -84,7 +84,8 @@ namespace MiniVille
                 //Affichage et Achat des cartes achetables par le joueur
                 if (this.players[current_player].GetType == "IA")
                 {
-
+                    this.pile.DisplayShop();
+                    this.ChoixInteger("Entrez le numéro de la carte que vous souhaitez acheter", "numéro invalide", true, 0, true, );
                 }
                 else
                 {
@@ -113,6 +114,33 @@ namespace MiniVille
             }
 
             return sum;
+        }
+
+        //Fonction qui restreint le choix d'un integer par l'utilisateur et qui permet la définition d'une range de sélection
+        public int ChoixInteger(string message, string error = "", bool haveFrom = false, int from = 0, bool haveTo = false, int to = 0)
+        {
+            int integer;
+            bool nb_valide;
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                Console.WriteLine(message);
+            }
+            do
+            {
+                Console.Write("> ");
+                nb_valide = int.TryParse(Console.ReadLine(), out integer);
+                if ((integer < from && haveFrom) || (integer >= to && haveTo))
+                {
+                    nb_valide = false;
+                }
+                if (!nb_valide && !String.IsNullOrWhiteSpace(error))
+                {
+                    Console.WriteLine(error);
+                }
+            } while (!nb_valide);
+
+            return integer;
         }
     }
 }
