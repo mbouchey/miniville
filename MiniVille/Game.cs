@@ -26,6 +26,8 @@ namespace MiniVille
             cards.Add(new Card("Restaurant","Red",4,2,5));
             cards.Add(new Card("Stade","Blue",6,4,6));
 
+            pile = new Pile(cards);
+
             //Listes de cartes pour les joueurs au débuts de jeu
             List<Card> starterCards = new List<Card>
             {
@@ -34,10 +36,12 @@ namespace MiniVille
             };
 
             //Joueurs
-            players.Add(new Player(starterCards, "Joueur_1", "Player"));
-            players.Add(new Player(starterCards, "Joueur_2", "IA"));
+            players = new List<Player>();
+            this.players.Add(new Player(starterCards, "Joueur_1", "Player"));
+            this.players.Add(new Player(starterCards, "Joueur_2", "IA"));
 
             //Dés
+            dices = new List<Dice>();
             dices.Add(new Dice());
 
             Console.WriteLine("Voulez-vous jouer avec deux dés ? (oui - non)");
@@ -45,6 +49,8 @@ namespace MiniVille
             {
                 dices.Add(new Dice());
             }
+
+            RunGame();
         }
 
         public void RunGame()
@@ -54,10 +60,12 @@ namespace MiniVille
             int choix_achat;
             bool in_shop;
 
-            while(players.Any(p => p.money >= 20))
+            while(players.Any(p => p.money < 20))
             {
+                Console.WriteLine(players.Any(p => p.money >= 20));
                 //Lancer de dé
                 this.LancerDes();
+                Console.WriteLine(this.players[current_player].name + " a fait " + GetSumDices() + " avec son lancer de dé");
 
                 //Recherche de carte Utilisable par les joueurs
                 foreach (Player player in this.players)
@@ -73,6 +81,7 @@ namespace MiniVille
                 }
                 else
                 {
+                    Console.WriteLine("Vous avez " + this.players[current_player].money + " pièce" + (this.players[current_player].money > 1 ? "s" : ""));
                     this.pile.DisplayShop();
                     in_shop = true;
                     do
