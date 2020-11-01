@@ -65,7 +65,8 @@ namespace MiniVille
                     {
                         foreach (var card in this.players[i].cards)
                         {
-                            if ((card.color == "Red" || card.color == "Blue") && this.GetSumDices() >= card.activation_value)
+                            //TODO : refaire l'activation value avec une liste de valeurs dans cards et ici mettre un in array
+                            if ((card.color == "Red" || card.color == "Blue") && this.GetSumDices() == card.activation_value)
                             {
                                 this.players[i].EarnMoney(card.earning_money);
                             }
@@ -74,6 +75,14 @@ namespace MiniVille
                 }
 
                 //Affichage et Achat des cartes achetables par le joueur
+                if (this.players[])
+                {
+
+                }
+                else
+                {
+
+                }
 
                 //Changement de joueur
                 current_player = (current_player + 1 == nb_players ? 0 : current_player + 1);
