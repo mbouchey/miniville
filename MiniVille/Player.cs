@@ -18,8 +18,9 @@ namespace MiniVille
             this.money = 3;
         }
 
-        public void CheckCards(int dice, bool isPlaying, Player currentPlayer)
+        public void CheckCards(int dice, Player currentPlayer)
         {
+            bool isPlaying = this.Equals(currentPlayer);
             foreach (Card card in cards)
             {
                 if (card.activation_value == dice)
