@@ -19,7 +19,7 @@ namespace MiniVille
         }
 
         //Returns the card with the wanted id
-        public Card SellCard(int id)
+        public Card GetCard(int id)
         {
             return Available_cards.Find(x => x.Id == id);
         }

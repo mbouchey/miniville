@@ -34,8 +34,8 @@ namespace MiniVille
             };
 
             //Joueurs
-            players.Add(new Player(starterCards, "Joueur_1"));
-            players.Add(new Player(starterCards, "Joueur_2"));
+            players.Add(new Player(starterCards, "Joueur_1", "Player"));
+            players.Add(new Player(starterCards, "Joueur_2", "IA"));
 
             //Dés
             dices.Add(new Dice());
@@ -51,6 +51,8 @@ namespace MiniVille
         {
             int current_player = 0;
             int nb_players = this.players.Count;
+            int choix_achat;
+            bool in_shop;
 
             while(players.Any(p => p.money >= 20))
             {
@@ -64,14 +66,29 @@ namespace MiniVille
                 }
 
                 //Affichage et Achat des cartes achetables par le joueur
-                if (this.players[current_player].GetType == "IA")
+                if (this.players[current_player].type == "IA")
                 {
-                    this.pile.DisplayShop();
-                    this.ChoixInteger("Entrez le numéro de la carte que vous souhaitez acheter", "numéro invalide", true, 0, true, );
+                    
+
                 }
                 else
                 {
+                    this.pile.DisplayShop();
+                    in_shop = true;
+                    do
+                    {
+                        choix_achat = this.ChoixInteger("Entrez le numéro de la carte que vous souhaitez acheter", "numéro invalide", true, 0, true, this.pile.Available_cards.Count + 1);
 
+                        if (this.players[current_player].money >= this.pile.GetCard(choix_achat).price)
+                        {
+                            this.players[current_player].BuyCard(this.pile.GetCard(choix_achat));
+                        }
+
+                        if (choix_achat == this.pile.Available_cards.Count)
+                        {
+                            in_shop = false;
+                        }
+                    } while (in_shop);
                 }
 
                 //Changement de joueur
