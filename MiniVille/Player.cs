@@ -53,9 +53,11 @@ namespace MiniVille
             }
         }
 
-        public int BuyCard()
+        public void BuyCard(Card newCard)
         {
-            return 1;
+            cards.Add(newCard);
+            LooseMoney(newCard.price);
+            Console.WriteLine("{0} a acheté la carte \"{1}\" !", name, newCard.name);
         }
 
         public void EarnMoney(int amount)
