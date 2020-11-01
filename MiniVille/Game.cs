@@ -75,7 +75,7 @@ namespace MiniVille
                 }
 
                 //Affichage et Achat des cartes achetables par le joueur
-                if (this.players[])
+                if (this.players[current_player].GetType == "IA")
                 {
 
                 }
