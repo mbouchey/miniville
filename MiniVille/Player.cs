@@ -9,12 +9,14 @@ namespace MiniVille
     {
         public List<Card> cards;
         public string name;
+        public string type;
         public int money;
 
-        public Player(List<Card> cards, string name)
+        public Player(List<Card> cards, string name, string type = "IA")
         {
             this.cards = cards;
             this.name = name;
+            this.type = type;
             this.money = 3;
         }
 
