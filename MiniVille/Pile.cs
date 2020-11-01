@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MiniVille
 {
@@ -27,11 +28,41 @@ namespace MiniVille
         //Show All cards with their information IN THE CONSOLE
         public void DisplayShop()
         {
-            foreach(Card i in Available_cards)
+            for (int i = 0; i < Available_cards.Count(); i++)
             {
-                Console.WriteLine(i.ToString());
+                Card card = Available_cards[i];
+                ConsoleColor color;
+                switch (card.color)
+                {
+                    case "Red":
+                        color = ConsoleColor.Red;
+                        break;
+
+                    case "Blue":
+                        color = ConsoleColor.Blue;
+                        break;
+
+                    case "Green":
+                        color = ConsoleColor.White;
+                        break;
+
+                    default:
+                        color = ConsoleColor.White;
+                        break;
+                }
+                WriteInColor(String.Format("\nID : {0}\n", i) + card.ToString(), color);
             }
+            Console.WriteLine("\nTaper {0} pour ne rien acheter", Available_cards.Count());
                 
+        }
+
+        public void WriteInColor(string message, ConsoleColor fore_color = ConsoleColor.White)
+        {
+            // Black / DarkBlue / DarkGreen / DarkCyan / DarkRed / DarkMagenta / DarkYellow / Gray / DarkGray / Blue / Green / Cyan / Red / Magenta / Yellow / White
+
+            Console.ForegroundColor = fore_color;
+            Console.Write(message);
+            Console.ResetColor();
         }
     }
 }

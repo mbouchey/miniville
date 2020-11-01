@@ -31,6 +31,13 @@ namespace MiniVille
 
         public override string ToString()
         {
+            string toString = this.name;
+            toString += "\n---------";
+            toString += String.Format("\nCouleur : {0}", this.color);
+            toString += String.Format("\nRevenu : {0} pièces", this.earning_money);
+            toString += String.Format("\nValeur d'activation : {0}", this.activation_value);
+            toString += String.Format("\n\nPrix : {0} pièces", this.price);
+
             return String.Format("name:{0}|color:{1}|price:{2}|earning_money:{3}|activation_value:{4}\n", this.name, this.color, this.price, this.earning_money, this.activation_value);
 
         }
