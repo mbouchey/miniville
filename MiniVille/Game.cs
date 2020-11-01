@@ -11,9 +11,12 @@ namespace MiniVille
         public List<Player> players;
         public Pile pile;
         public List<Dice> dices;
+        private Random rand;
 
         public Game()
         {
+            rand = new Random();
+
             //Cartes
             List<Card> cards = new List<Card>();
 
@@ -68,8 +71,14 @@ namespace MiniVille
                 //Affichage et Achat des cartes achetables par le joueur
                 if (this.players[current_player].type == "IA")
                 {
-                    
-
+                    if (this.players[current_player].money < 13)
+                    {
+                        List<Card> possibleCards = this.pile.Available_cards.FindAll(card => card.price <= this.players[current_player].money);
+                        this.players[current_player].BuyCard(possibleCards[rand.Next(possibleCards.Count())]);
+                    } else
+                    {
+                        Console.WriteLine("{0} n'a rien acheté.", this.players[current_player].name);
+                    }
                 }
                 else
                 {
