@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Threading;
 
 namespace MiniVille
 {
@@ -31,17 +32,10 @@ namespace MiniVille
 
             pile = new Pile(cards);
 
-            //Listes de cartes pour les joueurs au débuts de jeu
-            List<Card> starterCards = new List<Card>
-            {
-                cards[0],
-                cards[2]
-            };
-
             //Joueurs
             players = new List<Player>();
-            this.players.Add(new Player(starterCards, "Joueur_1", "Player"));
-            this.players.Add(new Player(starterCards, "Joueur_2", "IA"));
+            this.players.Add(new Player(cards, "Joueur_1", "Player"));
+            this.players.Add(new Player(cards, "Joueur_2", "IA"));
 
             //Dés
             dices = new List<Dice>();
@@ -63,15 +57,20 @@ namespace MiniVille
             int choix_achat;
             bool in_shop;
 
-            while(players.Any(p => p.money < 20))
+            while(!players.Any(p => p.money >= 20))
             {
+                Console.WriteLine("Tour de {0}", this.players[current_player].name);
+                Thread.Sleep(1000);
                 //Lancer de dé
                 this.LancerDes();
                 Console.WriteLine(this.players[current_player].name + " a fait " + GetSumDices() + " avec son lancer de dé");
+                Thread.Sleep(1000);
 
                 //Recherche de carte Utilisable par les joueurs
                 foreach (Player player in this.players)
                 {
+                    Console.WriteLine("\n{0} regarde ses cartes...", player.name);
+                    Thread.Sleep(1000);
                     player.CheckCards(GetSumDices(), this.players[current_player]);
                 }
 
@@ -81,7 +80,10 @@ namespace MiniVille
                     if (this.players[current_player].money < 13)
                     {
                         List<Card> possibleCards = this.pile.Available_cards.FindAll(card => card.price <= this.players[current_player].money);
-                        this.players[current_player].BuyCard(possibleCards[rand.Next(possibleCards.Count())]);
+                        if (possibleCards.Count() > 0)
+                        {
+                            this.players[current_player].BuyCard(possibleCards[rand.Next(possibleCards.Count())]);
+                        }
                     } else
                     {
                         Console.WriteLine("{0} n'a rien acheté.", this.players[current_player].name);
@@ -94,7 +96,7 @@ namespace MiniVille
                     in_shop = true;
                     do
                     {
-                        choix_achat = this.ChoixInteger("Entrez le numéro de la carte que vous souhaitez acheter", "numéro invalide", true, 0, true, this.pile.Available_cards.Count + 1);
+                        choix_achat = this.ChoixInteger("\nEntrez le numéro de la carte que vous souhaitez acheter", "numéro invalide", true, 0, true, this.pile.Available_cards.Count + 1);
 
                         if (choix_achat == this.pile.Available_cards.Count)
                         {
@@ -113,10 +115,20 @@ namespace MiniVille
                         }
                     } while (in_shop);
                 }
+                Thread.Sleep(1000);
+
+                Console.WriteLine("\ntaper \"Entrer\" pour continuer.");
+                Console.ReadLine();
 
                 //Changement de joueur
+                Console.Clear();
                 current_player = (current_player + 1 == nb_players ? 0 : current_player + 1);
             }
+
+            foreach (Player winner in players.FindAll(p => p.money >= 20))
+            {
+                Console.WriteLine("{0} a gagne avec {1} pièces", winner.name, winner.money);
+            };
         }
 
         private void LancerDes()

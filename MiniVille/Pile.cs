@@ -52,8 +52,7 @@ namespace MiniVille
                 }
                 WriteInColor(String.Format("\nID : {0}\n", i) + card.ToString(), color);
             }
-            Console.WriteLine("\nTaper {0} pour ne rien acheter", Available_cards.Count());
-                
+            Console.WriteLine("\nTaper {0} pour ne rien acheter.\n", Available_cards.Count());
         }
 
         public void WriteInColor(string message, ConsoleColor fore_color = ConsoleColor.White)

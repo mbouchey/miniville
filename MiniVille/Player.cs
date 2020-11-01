@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace MiniVille
 {
@@ -14,7 +16,13 @@ namespace MiniVille
 
         public Player(List<Card> cards, string name, string type = "IA")
         {
-            this.cards = cards;
+            //Listes de cartes pour les joueurs au débuts de jeu
+            List<Card> starterCards = new List<Card>
+            {
+                cards[0],
+                cards[2]
+            };
+            this.cards = starterCards;
             this.name = name;
             this.type = type;
             this.money = 3;
@@ -22,6 +30,8 @@ namespace MiniVille
 
         public void CheckCards(int dice, Player currentPlayer)
         {
+            DisplayCards();
+            Thread.Sleep(1000);
             bool isPlaying = this.Equals(currentPlayer);
             foreach (Card card in cards)
             {
@@ -31,6 +41,7 @@ namespace MiniVille
                     {
                         case "Blue":
                             Console.WriteLine("La carte Bleu \"{0}\" de {1} s'active.", card.name, name);
+                            Thread.Sleep(1000);
                             EarnMoney(card.earning_money);
                             break;
 
@@ -38,6 +49,7 @@ namespace MiniVille
                             if (isPlaying)
                             {
                                 Console.WriteLine("La carte Verte \"{0}\" de {1} s'active.", card.name, name);
+                                Thread.Sleep(1000);
                                 EarnMoney(card.earning_money);
                             }
                             break;
@@ -46,6 +58,7 @@ namespace MiniVille
                             if (!isPlaying)
                             {
                                 Console.WriteLine("La carte Rouge \"{0}\" de {1} s'active.", card.name, name);
+                                Thread.Sleep(1000);
                                 int gainedMoney = currentPlayer.LooseMoney(card.earning_money);
                                 EarnMoney(gainedMoney);
                             }
@@ -60,6 +73,7 @@ namespace MiniVille
             cards.Add(newCard);
             LooseMoney(newCard.price);
             Console.WriteLine("{0} a acheté la carte \"{1}\" !", name, newCard.name);
+            Thread.Sleep(1000);
         }
 
         public void EarnMoney(int amount)
@@ -67,6 +81,7 @@ namespace MiniVille
             money += amount;
 
             Console.WriteLine("{0} a gagné {1} pièces et a maintenant {2} pièces !", name, amount, money);
+            Thread.Sleep(1000);
         }
 
         public int LooseMoney(int amount)
@@ -86,6 +101,7 @@ namespace MiniVille
                 money -= amount;
                 Console.WriteLine("{0} a perdu {1} pièces et a maintenant {2} pièces.", name, amount, money);
             }
+            Thread.Sleep(1000);
 
             return oldMoney - money;
         }
@@ -93,6 +109,44 @@ namespace MiniVille
         public override string ToString()
         {
             return name;
+        }
+
+        public void DisplayCards()
+        {
+            for (int i = 0; i < cards.Count(); i++)
+            {
+                Card card = cards[i];
+                ConsoleColor color;
+                switch (card.color)
+                {
+                    case "Red":
+                        color = ConsoleColor.Red;
+                        break;
+
+                    case "Blue":
+                        color = ConsoleColor.Blue;
+                        break;
+
+                    case "Green":
+                        color = ConsoleColor.Green;
+                        break;
+
+                    default:
+                        color = ConsoleColor.White;
+                        break;
+                }
+                WriteInColor("\n" + card.name, color);
+            }
+            Console.WriteLine();
+        }
+
+        public void WriteInColor(string message, ConsoleColor fore_color = ConsoleColor.White)
+        {
+            // Black / DarkBlue / DarkGreen / DarkCyan / DarkRed / DarkMagenta / DarkYellow / Gray / DarkGray / Blue / Green / Cyan / Red / Magenta / Yellow / White
+
+            Console.ForegroundColor = fore_color;
+            Console.WriteLine(message);
+            Console.ResetColor();
         }
     }
 }

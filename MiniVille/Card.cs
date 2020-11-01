@@ -36,7 +36,7 @@ namespace MiniVille
             toString += String.Format("\nCouleur : {0}", this.color);
             toString += String.Format("\nRevenu : {0} pièces", this.earning_money);
             toString += String.Format("\nValeur d'activation : {0}", this.activation_value);
-            toString += String.Format("\n\nPrix : {0} pièces", this.price);
+            toString += String.Format("\nPrix : {0} pièces\n", this.price);
 
             return toString;
 
