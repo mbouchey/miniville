@@ -41,30 +41,62 @@ namespace MiniVille
 
         public void RunGame()
         {
+            int current_player = 0;
+            int nb_players = this.players.Count;
+
             while(/*variable money*/)
             {
-                //Lancer de dé du joueur A
-                
-                //Recherche de carte Utilisable par le joueur B (carte Rouge ou Bleu)
+                //Lancer de dé
+                this.LancerDes();
 
-                //Recherche de carte Utilisable par le joueur A (carte Verte ou Bleu)
+                //Recherche de carte Utilisable par le joueur (carte Verte ou Bleu)
+                foreach (var card in this.players[current_player].cards)
+                {
+                    if ((card.color == "Green" || card.color == "Blue") && this.GetSumDices() >= card.activation_value)
+                    {
+                        this.players[current_player].EarnMoney(card.earning_money);
+                    }
+                }
 
-                //Affichage et Achat des cartes achetables par le joueur A
+                //Recherche de carte Utilisable par les autres joueurs (carte Rouge ou Bleu)
+                for (int i = 0; i < nb_players; i++)
+                {
+                    if (i != current_player)
+                    {
+                        foreach (var card in this.players[i].cards)
+                        {
+                            if ((card.color == "Red" || card.color == "Blue") && this.GetSumDices() >= card.activation_value)
+                            {
+                                this.players[i].EarnMoney(card.earning_money);
+                            }
+                        }
+                    }
+                }
 
-                //Fin du tour Joueur A
+                //Affichage et Achat des cartes achetables par le joueur
 
-                //Lancer de dé du joueur B
-
-                //Recherche de carte Utilisable par le joueur A (carte Rouge ou Bleu)
-
-                //Recherche de carte Utilisable par le joueur B (carte Verte ou Bleu)
-
-                //Affichage et Achat des cartes achetables par le joueur B
-
-                //Fin du tour Joueur B
-
+                //Changement de joueur
+                current_player = (current_player + 1 == nb_players ? 0 : current_player + 1);
             }
         }
 
+        private void LancerDes()
+        {
+            foreach (var dice in dices)
+            {
+                dice.Lancer();
+            }
+        }
+
+        private int GetSumDices()
+        {
+            int sum = 0;
+            foreach (var dice in dices)
+            {
+                sum += dice.face;
+            }
+
+            return sum;
+        }
     }
 }

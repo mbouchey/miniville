@@ -13,10 +13,12 @@ namespace MiniVille
         {
             //NbFaces = 6;
         }
+
         public Dice(int NbFaces)
         {
             this.NbFaces = NbFaces;
         }
+
         public virtual void Lancer()
         {
             int rdm = random.Next(1, NbFaces + 1);
